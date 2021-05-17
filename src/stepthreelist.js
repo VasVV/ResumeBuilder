@@ -19,7 +19,7 @@ export default function StepThreeList () {
     return (
         <>
             <h3>EXPERIENCE</h3>
-            <p>List your work experience, from the most recent to the oldest.</p>
+            <p>List your degrees, from the most recent to the oldest.</p>
             <Container fluid>
                 <Col>
                     {
@@ -34,7 +34,7 @@ export default function StepThreeList () {
                                   <Button className='float-right' ><EditIcon /></Button>
                                  
                                     <p>  {e.field}, {e.degree} </p>
-                                    <p> finised {e.endMonth}, {e.endYear}</p>
+                                    <p> finished {e.endMonth}, {e.endYear}</p>
                                     
                                     </Card.Text> 
                                 </Card>
@@ -43,7 +43,7 @@ export default function StepThreeList () {
                     }
                     <Row>
                         <Col xs={10}><Link to='/stepthree' className='d-flex justify-content-center'><Button><AddIcon />Add another degree</Button></Link></Col>
-                        <Col><Link to='/stepfourtips' className='float-right'><Button>Save and continue</Button></Link></Col>
+                        <Col><Link to='/alltips' className='float-right'><Button onClick={() => dispatch({type: 'UPDATE_TIP', payload: {num: 2, prev: '/stepthreelist', next: '/stepfour', img: 2} })}>Save and continue</Button></Link></Col>
                     </Row>
                     
                 </Col>

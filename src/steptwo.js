@@ -1,5 +1,5 @@
 import {Container, Col, Row, Button, Form} from 'react-bootstrap';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ResumeStart from './img/resumestart.jpg';
@@ -16,6 +16,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import experienceimg from './img/experience.PNG';
 
 export default function StepTwo () {
+
+    const back = () => {
+        dispatch({type: 'UNSET_ALREADY', payload: 2});
+        dispatch({type: 'UPDATE_TIP', payload: {num: 0, prev: '/stepone', next: '/steptwo', img: 0}}) 
+    }
+
+    useEffect(() => {
+        dispatch({type: 'SET_CURRPAGE', payload: 2 });
+        dispatch({type: 'SET_ALREADY', payload: 2})
+    },[])
 
     const dispatch = useDispatch();
 
@@ -92,8 +102,8 @@ export default function StepTwo () {
                     </Form>
                     <Row>
                         <Col>
-                        <Link to="/steptwotips">
-                    <Button variant="primary" className='btn-back'>Back</Button>
+                        <Link to="/alltips">
+                    <Button variant="primary" className='btn-back' onClick= {() => back()} >Back</Button>
                     </Link> 
                     </Col>
                     <Col>

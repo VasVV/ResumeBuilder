@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ResumeStart from './img/resumestart.jpg';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Header from './header';
 import BuildResume from './img/buildresume.svg';
 
 import DownloadResume from './img/downloadresume.svg';
@@ -13,17 +13,26 @@ import TemplateTwo from './img/templatetwo.jpg';
 import TemplateThree from './img/templatethree.jpg';
 import { useSelector, useDispatch } from 'react-redux';
 import chosetemplatereducer from './reducers/chosetemplate'
+import { useEffect } from 'react';
 
 export default function ChoseTemplate() {
 
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({type: 'SET_CURRPAGE', payload: 0 });
+        dispatch({type: 'SET_ALREADY', payload: 0})
+    },[])
+
     
    
 
 
     return (
         <>
+        
+        
         <h1>CHOOSE YOUR RESUME TEMPLATE</h1>
         <Container fluid>
         <Row className='templateRow'>

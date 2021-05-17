@@ -1,0 +1,43 @@
+body {
+    line-height: 1.4;
+    padding: 3em;
+    font-family: "Merriweather", serif;
+}
+
+h1 {
+font-size: 1.4em;
+margin-bottom: 2em;
+text-transform: uppercase;
+font-weight: bold;
+padding-bottom: 0.28em;
+color: #1F70D2;
+    }
+
+h2 {
+font-size: 1.29em;
+margin-bottom: 1em;
+text-transform: uppercase;
+font-weight: normal;
+border-bottom: 0.11em dotted;
+padding-bottom: 0.28em;
+padding-top: 10px;
+    }
+
+li {
+    list-style-type: none;
+}
+
+.icon-sm {
+  
+    max-width: 30px;
+    max-height: 20px;
+    width: auto;
+    height: auto;
+}
+
+.lastLi {
+    padding-bottom: 25px;
+}
+.skill-level {
+    padding-left: 30px;
+}

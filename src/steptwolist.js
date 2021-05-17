@@ -43,7 +43,7 @@ export default function StepTwoList () {
                     }
                     <Row>
                         <Col xs={10}><Link to='/steptwo' className='d-flex justify-content-center'><Button><AddIcon />Add another job</Button></Link></Col>
-                        <Col><Link to='/stepthree' className='float-right'><Button>Save and continue</Button></Link></Col>
+                        <Col><Link to='/alltips' className='float-right'><Button onClick={()=> dispatch({type: 'UPDATE_TIP', payload: {num: 1, prev: '/steptwolist', next: '/stepthree', img: 1} })}>Save and continue</Button></Link></Col>
                     </Row>
                     
                 </Col>

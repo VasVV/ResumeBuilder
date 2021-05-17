@@ -7,9 +7,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import experienceimg from './img/experience.PNG'; //2
 import educationimg from './img/education.PNG'; //3
 import skillsimg from './img/skills.PNG'; //4
+import summaryImg from './img/summary.PNG'; //5
 
 import {useDispatch, useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
+
+const allImgs = [experienceimg, educationimg, skillsimg, summaryImg]
 
 const allTips = [
     [//step two
@@ -29,7 +32,7 @@ const allTips = [
                'Use one or two keywords, not complete sentences. For example: "Project Management", "Online Marketing", "HTML", "SEO", etc.',
                 'Make sure to include all important skills for the job you are applying for, even if you are not proficient on some of them.',
                 'Keep it short. Try to showcase no more than 8 skills.'
-    ]
+    ],
     [//step five
         'Keep your summary short and straight to the point. You can always elaborate during the interview. The optimal length for a professional summary is between 50 and 100 words.',
     'Tailor the summary to the job you are applying for. Show the employer exactly why you’re the best fit for this position.',
@@ -59,10 +62,11 @@ export default function AllTips() {
             <Col xs={8}>
             
             {
-               num ? allTips.map((e,i) => {
-                   
-                    if (i == num.num) {
-                        {console.log(e)}
+               num ? allTips.map((e,i,a) => {
+                
+                        
+                    if (i == num.num ) {
+                        
                        return (<ul className='tipsul'>
                             
                         <li><CheckCircleIcon /> {e[0]}</li>
@@ -89,7 +93,7 @@ export default function AllTips() {
                         </Row>
             </Col>
             <Col>
-            <img src={experienceimg } className='steptwoimg' />
+            <img src={allImgs[num.img]} className='steptwoimg' />
             </Col>
             
         </Row>

@@ -1,4 +1,4 @@
-import {Container, Col, Row, Button, Form, Dropdown, DropdownButton} from 'react-bootstrap';
+import {Container, Col, Row, Button, Form, Dropdown, DropdownButton, Card} from 'react-bootstrap';
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -15,14 +15,27 @@ import TemplateThree from './img/templatethree.jpg';
 import { useSelector, useDispatch } from 'react-redux';
 import skillsimg from './img/skills.PNG';
 
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+
 export default function StepFour () {
+
+    
 
     const dispatch = useDispatch();
 
     const [skills, setSkills] = useState([[],[],[]]);
 
+    useEffect(() => {
+        dispatch({type: 'SET_CURRPAGE', payload: 4 });
+        dispatch({type: 'SET_ALREADY', payload: 4})
+    },[])
      
-    
+    const back = () => {
+
+            dispatch({type: 'UPDATE_TIP', payload: {num: 2, prev: '/stepthreelist', next: '/stepfour', img: 2}});
+            dispatch({type: 'UNSET_ALREADY', payload: 4});
+        
+    }
 
     
 
@@ -30,6 +43,7 @@ export default function StepFour () {
     const skillSelect = (index, skill) => {
       let valCopy =[...skills];
      valCopy[index] = {...valCopy[index], skill: skill};
+     setSkills(valCopy);
     }
 
     const levelSelect = (e, index, level) => {
@@ -37,6 +51,16 @@ export default function StepFour () {
         const valCopy =[...skills];
         valCopy[index] = {...valCopy[index], level: level};
         setSkills(valCopy);
+     }
+
+     const removeSkill = index => {
+         let skillsCopy = [...skills].filter((e,i) => i !== index);;
+         setSkills(skillsCopy);
+     }
+
+     const next = () => {
+        dispatch({type: 'ADD_SKILL', payload: skills});
+        dispatch({type: 'UPDATE_TIP', payload: {num: 3, prev: '/stepfour', next: '/stepfive', img: 3} })
      }
     return (
         <>
@@ -49,6 +73,7 @@ export default function StepFour () {
                     <Form>
                         {skills ? skills.map((e,i) => {
                             return (
+                                <Card>
                                 <Form.Group>
                             <Row>
                                 <Col>
@@ -64,16 +89,21 @@ export default function StepFour () {
                                         <Dropdown.Item as="button" name='advanced' onClick={(e) => levelSelect(e,i, e.target.name)}>Advanced</Dropdown.Item>
                                         <Dropdown.Item as="button" name='expert' onClick={(e) => levelSelect(e,i, e.target.name)}>Expert</Dropdown.Item>
                                         <Dropdown.Item as="button" name='false' onClick={(e) => levelSelect(e,i, e.target.name)}>Don't show level</Dropdown.Item>
-                                        </DropdownButton>
+                                    </DropdownButton>
+                                    <Button className='btn-del-steptwo btn-danger float-right' onClick={() => removeSkill(i)}><DeleteForeverIcon  /></Button>
+                                  
+                               
                                 </Col>
+                                
                             </Row>
                             </Form.Group>
+                            </Card>
                             )
                         }) : ''}
                             <Row>
-                                <Col><Button>Back</Button></Col>
+                                <Col><Link to='/alltips'><Button onClick= {()=>back()}>Back</Button></Link></Col>
                                 <Col><Button onClick={() => setSkills([...skills, []])}>Add more skills</Button></Col>
-                                <Col><Button>Save and continue</Button></Col>
+                                <Col><Link to='/alltips'><Button onClick={() => next()}>Save and continue</Button></Link></Col>
                             </Row>
                        
                     </Form>

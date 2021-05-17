@@ -110,3 +110,27 @@ opacity: 1;
   margin-left: 10px;
   margin-right: 10px;
 }
+
+.summary-text {
+  height: 100% !important;
+  width: 100%
+}
+
+.resume-box {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+   height: 100%;
+   width: 40vw;
+   
+   padding: 2%    
+}
+
+.name {
+  color: blue
+}
+.page {
+ padding: 50px
+}
+.resume {
+  margin-left: 25% !important;
+   margin-top: 5%;
+}

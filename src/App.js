@@ -21,6 +21,10 @@ import StepThreeTips from './stepthreetips';
 import StepThreeList from './stepthreelist';
 import StepFour from './stepfour';
 import StepFourTips from './stepfourtips';
+import StepFive from './stepfive';
+import DoneResume from './doneresume';
+import Header from './header';
+import Navbar from 'react-bootstrap/Navbar';
 
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -28,6 +32,9 @@ const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && wi
 function App() {
   return (
     <Provider store={store}>
+      <Navbar>
+       <Header />
+       </Navbar>
     <Router>
 
 
@@ -69,8 +76,17 @@ function App() {
           <Route path='/stepfour'>
             <StepFour />
           </Route>
+          <Route path='/stepfive'>
+            <StepFive />
+          </Route>
+          <Route path='/doneresume'>
+            <DoneResume />
+          </Route>
+          
     </Switch>
+   
     </Router>
+    
     </Provider>
   );
 }

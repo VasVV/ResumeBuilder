@@ -1,5 +1,5 @@
 import {Container, Col, Row, Button, Form} from 'react-bootstrap';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ResumeStart from './img/resumestart.jpg';
@@ -16,10 +16,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import educationimg from './img/education.PNG';
 
 export default function StepThree () {
+
+    useEffect(() => {
+        dispatch({type: 'SET_CURRPAGE', payload: 3 });
+        dispatch({type: 'SET_ALREADY', payload: 3})
+    },[])
+
     const dispatch = useDispatch();
     const [val, setVal] = useState({
         school: '', city: '', country: '', degree: '', field: '', endYear: '', endMonth: ''
     });
+
+    const back = () => {
+        dispatch({type: 'UPDATE_TIP', payload: {num: 1, prev: '/steptwolist', next: '/stepthree', img: 1}});
+        dispatch({type: 'UNSET_ALREADY', payload: 3});
+    }
    return (
     <>
     <h3>EDUCATION</h3>
@@ -80,8 +91,8 @@ export default function StepThree () {
                     </Form>
                     <Row>
                         <Col>
-                        <Link to="/steptwotips">
-                    <Button variant="primary" className='btn-back'>Back</Button>
+                        <Link to="/alltips">
+                    <Button variant="primary" className='btn-back' onClick= {()=>back()}>Back</Button>
                     </Link> 
                     </Col>
                     <Col>

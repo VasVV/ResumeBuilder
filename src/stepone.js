@@ -1,5 +1,5 @@
 import {Container, Col, Row, Button, Form} from 'react-bootstrap';
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ResumeStart from './img/resumestart.jpg';
@@ -19,6 +19,11 @@ export default function StepOne () {
 
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch({type: 'SET_CURRPAGE', payload: 1 });
+        dispatch({type: 'SET_ALREADY', payload: 1})
+    },[])
+
     
 
     const [val, setVal] = useState({
@@ -28,7 +33,7 @@ export default function StepOne () {
 
     const next = () => {
         dispatch({type: 'SUBMIT_INFO', payload: val });
-        dispatch({type: 'UPDATE_TIP', payload: {num: 0, prev: '/stepone', next: '/steptwo', img: ''} });
+        dispatch({type: 'UPDATE_TIP', payload: {num: 0, prev: '/stepone', next: '/steptwo', img: 0} });
     }
 
     return (
@@ -96,14 +101,11 @@ export default function StepOne () {
                     <Row>
                         <Col>
                         <Link to="/chosetemplate">
-                    <Button variant="primary" className='btn-back'>Back</Button>
+                    <Button variant="primary" className='btn-back' onClick= {()=>dispatch({type: 'UNSET_ALREADY', payload: 1})}>Back</Button>
                     </Link> 
                     </Col>
                     <Col>
-                    <Link  to={{
-                        pathname: "/alltips",
-                        state: { name: 'jack', age: 25, city: 'Antwerp'}
-  }}>
+                    <Link  to="/alltips">
                         <Button variant="primary" className=' float-right' onClick={() => next()}>
                             Save and next
                         </Button>
