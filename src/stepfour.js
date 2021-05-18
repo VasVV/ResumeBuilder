@@ -1,4 +1,4 @@
-import {Container, Col, Row, Button, Form, Dropdown, DropdownButton, Card} from 'react-bootstrap';
+import {Container, Col, Row, Button, Form, Dropdown, DropdownButton, Card, Alert} from 'react-bootstrap';
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -29,6 +29,16 @@ export default function StepFour () {
         dispatch({type: 'SET_CURRPAGE', payload: 4 });
         dispatch({type: 'SET_ALREADY', payload: 4})
     },[])
+
+    const [err,setErr] = useState(true);
+
+    useEffect(() => {
+        setErr(!skills.every(e => e.skill))
+        console.log(skills)
+        if (skills.length < 3) {
+            setErr(true)
+        }
+    })
      
     const back = () => {
 
@@ -63,14 +73,15 @@ export default function StepFour () {
         dispatch({type: 'UPDATE_TIP', payload: {num: 3, prev: '/stepfour', next: '/stepfive', img: 3} })
      }
     return (
-        <>
+        <div className='ext'>
         <h3>SKILLS</h3>
         <p>Highlight 6-8 of your top skills.</p>
         <Container fluid>
             <Row>
-                <Col xs={8}>
-                        
-                    <Form>
+                <Col xs={8} className='form-col'>
+                <Alert show={err} variant="danger">Make sure you've written at least 3 skills and filled the fields</Alert>
+
+                    <Form >
                         {skills ? skills.map((e,i) => {
                             return (
                                 <Card>
@@ -83,27 +94,30 @@ export default function StepFour () {
                                 <Col>
                                     <Form.Label>Level</Form.Label>
                                     <DropdownButton id="dropdown-item-button" title="Dropdown button">
-                                        <Dropdown.ItemText as="button" name='novice' onClick={(e) => levelSelect(e,i, e.target.name)} >Novice</Dropdown.ItemText>
+                                        <Dropdown.ItemText as="button" name='novice'  onClick={(e) => levelSelect(e,i, e.target.name)} >Novice</Dropdown.ItemText>
                                         <Dropdown.Item as="button" name='beginner' onClick={(e) => levelSelect(e,i, e.target.name)}>Beginner</Dropdown.Item>
                                         <Dropdown.Item as="button" name='experienced' onClick={(e) => levelSelect(e,i, e.target.name)}>Experienced</Dropdown.Item>
                                         <Dropdown.Item as="button" name='advanced' onClick={(e) => levelSelect(e,i, e.target.name)}>Advanced</Dropdown.Item>
                                         <Dropdown.Item as="button" name='expert' onClick={(e) => levelSelect(e,i, e.target.name)}>Expert</Dropdown.Item>
                                         <Dropdown.Item as="button" name='false' onClick={(e) => levelSelect(e,i, e.target.name)}>Don't show level</Dropdown.Item>
                                     </DropdownButton>
-                                    <Button className='btn-del-steptwo btn-danger float-right' onClick={() => removeSkill(i)}><DeleteForeverIcon  /></Button>
-                                  
+                                    </Col>
+                                    <Col>
+                                    
+                                    <Button className='btn-danger btn-delete-skill  float-right' onClick={() => removeSkill(i)}><DeleteForeverIcon  /></Button>
+                                    </Col>
                                
-                                </Col>
+                                
                                 
                             </Row>
                             </Form.Group>
                             </Card>
                             )
                         }) : ''}
-                            <Row>
+                            <Row className='padding-top'>
                                 <Col><Link to='/alltips'><Button onClick= {()=>back()}>Back</Button></Link></Col>
                                 <Col><Button onClick={() => setSkills([...skills, []])}>Add more skills</Button></Col>
-                                <Col><Link to='/alltips'><Button onClick={() => next()}>Save and continue</Button></Link></Col>
+                                <Col><Link to='/alltips' className='d-flex justify-content-end'><Button  onClick={() => next()} disabled={err}>Save and continue</Button></Link></Col>
                             </Row>
                        
                     </Form>
@@ -114,7 +128,7 @@ export default function StepFour () {
                     </Col>
             </Row>
         </Container>
-        </>
+        </div>
 
     )
 }

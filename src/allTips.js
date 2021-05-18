@@ -47,19 +47,21 @@ export default function AllTips() {
 
     const value = useSelector(state => state.tipsreducer)
     const [num, setNum] = useState('');
-
+   
     useEffect(() => {
         if (!num){
         setNum(value)}
-    })
-
+    });
+    console.log('num')
+    console.log(value)
     return (
-  <>
-        <h1>TIPS FOR YOUR {allSections[num.num]} SECTION</h1>
+  <div className='ext'>
+        
         <Container fluid>
         
         <Row>
             <Col xs={8}>
+            <h1>TIPS FOR YOUR {num? allSections[num.num].toUpperCase() : ''} SECTION</h1>
             
             {
                num ? allTips.map((e,i,a) => {
@@ -92,12 +94,12 @@ export default function AllTips() {
                         </Col>
                         </Row>
             </Col>
-            <Col>
+            <Col xs={4}>
             <img src={allImgs[num.img]} className='steptwoimg' />
             </Col>
             
         </Row>
         </Container>
-  </>     
+  </div>     
     )
 }

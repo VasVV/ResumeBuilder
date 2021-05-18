@@ -1,4 +1,4 @@
-import {Container, Col, Row, Button, Form} from 'react-bootstrap';
+import {Container, Col, Row, Button, Form, Alert} from 'react-bootstrap';
 import {useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -30,20 +30,32 @@ export default function StepOne () {
         fname: '', lname: '', address: '', city: '', zip: '', country: '', email: '', phone: ''
     });
 
+    const [err, setErr] = useState(true);
+
+
+    const checkFilled = () => {
+        setErr(Object.values(val).some(e => !e))
+    };
+
+    useEffect(() => checkFilled())
 
     const next = () => {
+        
         dispatch({type: 'SUBMIT_INFO', payload: val });
-        dispatch({type: 'UPDATE_TIP', payload: {num: 0, prev: '/stepone', next: '/steptwo', img: 0} });
+        dispatch({type: 'UPDATE_TIP', payload: {num: 0, prev: '/stepone', next: '/steptwo', img: 0} })
+        
     }
 
     return (
-        <>
+        <div className='ext'>
+            
         <h3>COMPLETE YOUR RESUME HEADING</h3>
                         <p>Employers will use this information to contact you.</p>
+                        
             <Container fluid>
                 <Row>
-                    <Col xs={8}>
-                        
+                    <Col xs={8} className='form-col'>
+                    <Alert show={err} variant="danger">Please fill all fields to continue</Alert>
                     <Form>
                         <Form.Group>
                             <Row>
@@ -101,12 +113,12 @@ export default function StepOne () {
                     <Row>
                         <Col>
                         <Link to="/chosetemplate">
-                    <Button variant="primary" className='btn-back' onClick= {()=>dispatch({type: 'UNSET_ALREADY', payload: 1})}>Back</Button>
+                    <Button variant="primary" className='btn-back' onClick= {()=>dispatch({type: 'UNSET_ALREADY', payload: 1})} >Back</Button>
                     </Link> 
                     </Col>
                     <Col>
                     <Link  to="/alltips">
-                        <Button variant="primary" className=' float-right' onClick={() => next()}>
+                        <Button variant="primary" className=' float-right' onClick={() => next()} disabled={err}>
                             Save and next
                         </Button>
                     </Link>
@@ -118,7 +130,7 @@ export default function StepOne () {
                     </Col>
                 </Row>
             </Container>
-        </>
+            </div>
 
     )
 }

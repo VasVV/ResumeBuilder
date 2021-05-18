@@ -33,20 +33,24 @@ export default function StepFive () {
 
     const [summary, setSummary] = useState('');
     return (
-        <>
+        <div className='ext'>
+        
+        <Container fluid>
         <h3>PROFESSIONAL SUMMARY</h3>
         <p>Write a short summary telling more about yourself, your strengths and experience. Feel free to use our pre-written examples.</p>
-        <Container fluid>
             <Row>
-                <Col xs={8}><textarea className='summary-text' onChange ={(e) => setSummary(e.target.value)} /></Col>
+                
+                <Col xs={8} className='textarea-col'>
+               
+                    <textarea className='summary-text' onChange ={(e) => setSummary(e.target.value)} /></Col>
                 <Col><img src={summaryImg} /></Col>
             </Row>
             <Row>
-                                <Col xs={7}><Link to='/alltips'><Button onClick= {()=>back()} >Back</Button> </Link></Col>
+                                <Col xs={6}><Link to='/alltips'><Button onClick= {()=>back()} >Back</Button> </Link></Col>
                                 
                                 <Col><Link to='/doneresume'><Button onClick={()=> dispatch({type: 'ADD_SUMMARY', payload: summary})}>Save and continue</Button></Link></Col>
                             </Row>
         </Container>
-        </>
+        </div>
     )
 }

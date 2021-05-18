@@ -12,7 +12,19 @@ const addremovejobreducer = (state = {jobs:[]}, action, payload) => {
                 ...state.jobs.slice(0, action.payload),
                 ...state.jobs.slice(action.payload + 1)
             ]
-        } 
+          }
+        case 'EDIT_JOB':
+          return {
+            ...state, 
+            jobs: state.jobs.map((e,i) => {
+                if (i === action.payload.index) {
+                   return action.payload.val;
+                }
+    
+                return e;
+            }),
+            
+          } 
       default:
         return state
     }

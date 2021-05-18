@@ -41,28 +41,34 @@ import './resume-two-styles.scoped.css';
 
  
   export default function ResumeTwo() {
-    const pdata = useSelector(state => state.submitinforeducer[0]);
+    const pdata = useSelector(state => state.submitinforeducer);
     const summary = useSelector(state => state.addsummaryreducer);
     const jobs = useSelector(state => state.addremovejobreducer.jobs);
     const education = useSelector(state => state.addremoveeducationreducer.education);
-    const skills = useSelector(state => state.addremoveskillreducer);
+
+    let skills = useSelector(state => state.addremoveskillreducer);
+
+    console.log('skills')
+    console.log(skills)
     return (
       <>
+      <Row>
+      <Col>
       <div class = 'personal-info'>
         <h1>{pdata.fname} {pdata.lname}</h1>
-        <p> <LocationOnIcon /> {pdata.address}, {pdata.zip}, {pdata.city}, {pdata.country}</p>
-        <p><EmailIcon />{pdata.email} </p>
-        <p><PhoneIcon />{pdata.phone}</p>
+        <p> <LocationOnIcon color="primary"/> {pdata.address}, {pdata.zip}, {pdata.city}, {pdata.country}</p>
+        <p><EmailIcon color="primary"/>{pdata.email} </p>
+        <p><PhoneIcon color="primary"/>{pdata.phone}</p>
     </div>
-        <Col>
+        
     <div class = 'summary'>
-        <h2>< ListAltIcon /> Professional summary</h2>
+        <h2>< ListAltIcon color="primary"/> Professional summary</h2>
         <p>{summary}</p>
     </div>
      
     
     <div class = 'jobs'>
-        <h2><WorkIcon /> Employment history</h2>
+        <h2><WorkIcon color="primary"/> Employment history</h2>
         <ul>
         {jobs.map((e,i) => {
         return (<>
@@ -76,7 +82,7 @@ import './resume-two-styles.scoped.css';
     </div>
 
     <div class = 'schools'>
-        <h2><SchoolIcon /> Education</h2>
+        <h2><SchoolIcon color="primary"/> Education</h2>
         <ul>
         {education.map((e,i) => {
          return (
@@ -92,18 +98,30 @@ import './resume-two-styles.scoped.css';
      </Col>
      <Col>
     <div class = 'skills'>
-        <h2><ListAltIcon /> Skills</h2>
+        <h2><ListAltIcon color='primary'/> Skills</h2>
         <ul>
-        {skills.map(e => {
-          return (
-            <>
-            <li class='lastLi'>{e.skill}               <span class='skill-level'>{e.level}</span> </li>
-            </>
-          )
-        })}
+        {
+          skills.map(e => {
+            switch(e.level) {
+              case 'novice':
+               return <li class='lastLi'>{e.skill}               <span class='skill-level'><StarIcon /></span> </li>
+              case 'beginner':
+                return <li class='lastLi'>{e.skill}               <span class='skill-level'><StarIcon /><StarIcon /></span> </li>
+              case 'experienced':
+                return <li class='lastLi'>{e.skill}               <span class='skill-level'><StarIcon /><StarIcon /><StarIcon /></span> </li>
+              case 'advanced':
+                return   <li class='lastLi'>{e.skill}               <span class='skill-level'><StarIcon /><StarIcon /><StarIcon /><StarIcon /></span> </li>
+              case 'expert':
+                return    <li class='lastLi'>{e.skill}               <span class='skill-level'><StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon /></span> </li>
+              default:
+                return <li class='lastLi'>{e.skill}</li>
+            }
+          })
+        }
         </ul>
     </div>
     </Col>
+    </Row>
       </>  
       
       )

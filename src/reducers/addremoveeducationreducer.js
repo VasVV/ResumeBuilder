@@ -12,7 +12,19 @@ const addremoveeducationreducer = (state = {education:[]}, action, payload) => {
                 ...state.education.slice(0, action.payload),
                 ...state.education.slice(action.payload + 1)
             ]
-        } 
+        }
+        case 'EDIT_EDUCATION':
+          return {
+            ...state, 
+            education: state.education.map((e,i) => {
+                if (i === action.payload.index) {
+                   return action.payload.val;
+                }
+    
+                return e;
+            }),
+            
+          }  
       default:
         return state
     }

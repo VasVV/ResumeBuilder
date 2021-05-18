@@ -17,11 +17,12 @@ export default function StepThreeList () {
     const dispatch = useDispatch();
     useEffect(() => console.log(counter))
     return (
-        <>
-            <h3>EXPERIENCE</h3>
-            <p>List your degrees, from the most recent to the oldest.</p>
+        <div className='ext'>
             <Container fluid>
                 <Col>
+            <h3>EXPERIENCE</h3>
+            <p>List your degrees, from the most recent to the oldest.</p>
+            
                     {
                         counter.map((e,i) => {
                             return (
@@ -31,7 +32,7 @@ export default function StepThreeList () {
                                   <Card.Text>
                                   
                                   <Button className='btn-del-steptwo btn-danger float-right' onClick={() => dispatch({type: 'REMOVE_EDUCATION', payload: i })}><DeleteForeverIcon  /></Button>
-                                  <Button className='float-right' ><EditIcon /></Button>
+                                  <Link to='/stepthree'><Button className='float-right' onClick={() => dispatch({type: 'CHANGE', payload: i})}><EditIcon /></Button></Link>
                                  
                                     <p>  {e.field}, {e.degree} </p>
                                     <p> finished {e.endMonth}, {e.endYear}</p>
@@ -41,13 +42,15 @@ export default function StepThreeList () {
                             )
                         })
                     }
-                    <Row>
-                        <Col xs={10}><Link to='/stepthree' className='d-flex justify-content-center'><Button><AddIcon />Add another degree</Button></Link></Col>
-                        <Col><Link to='/alltips' className='float-right'><Button onClick={() => dispatch({type: 'UPDATE_TIP', payload: {num: 2, prev: '/stepthreelist', next: '/stepfour', img: 2} })}>Save and continue</Button></Link></Col>
+                    
+
+                    <Row className='padding-top'>
+                        <Col > <Link to='/stepthree' className='d-flex justify-content-start'><Button>Add another degree</Button></Link></Col>
+                        <Col><Link to='/alltips' className='float-right'><Button onClick={()=> dispatch({type: 'UPDATE_TIP', payload: {num: 2, prev: '/stepthreelist', next: '/stepfour', img: 2} })}>Save and continue</Button></Link></Col>
                     </Row>
                     
                 </Col>
             </Container>
-        </>
+        </div>
     )
 }

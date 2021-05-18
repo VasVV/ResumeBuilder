@@ -14,33 +14,43 @@ export default function Build() {
 
     return (
         <>
-        <h1>BUILDING A PERFECT RESUME HAS NEVER BEEN THIS EASY!</h1>
+        <div className='ext'>
+        
         <Container fluid>
+            <Row className='row-header'><h1>BUILDING A PERFECT RESUME HAS NEVER BEEN THIS EASY!</h1></Row>
             <Row className='buildrow'>
                 <Col>
-                <Col>
+                <Col className='d-flex justify-content-center'>
                 <div className='builddiv'><img src={BuildResume} className='buildimg' /> </div></Col>
-                <Col>Choose a professional resume template</Col>
+                <Col className='text-center'>Choose a professional resume template</Col>
                 </Col>
                 <Col>
-                <Col>
+                <Col className='d-flex justify-content-center'>
                 <div className='builddiv'><img src={ChoseTemplate} className='buildimg'/></div></Col>
-                <Col>Build your resume using our pre-written examples</Col>
-                <div className='buildbtn'>
-            <Link to="/chosetemplate">
-            <Button variant="success">Build my Resume</Button>
-            </Link>
-            </div>
+                <Col className='text-center'>Build your resume using our pre-written examples</Col>
+                
+            
                 </Col>
                 <Col>
-                <Col>
+                <Col className='d-flex justify-content-center'>
                 <div className='builddiv'><img src={DownloadResume} className='buildimg'/></div></Col>
-                <Col>Download your resume and start impressing employers</Col>
+                <Col className='text-center'>Download your resume and start impressing employers</Col>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                </Col>
+                <Col>
+                <Link to="/chosetemplate">
+            <Button variant="success" size="lg" className='big-btn' block >BUILD MY RESUME</Button>
+            </Link>
+                </Col>
+                <Col>
                 </Col>
             </Row>
             
         </Container>
-        
+        </div>
         </>
     )
 }

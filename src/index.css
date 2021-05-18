@@ -33,13 +33,14 @@ h1 {
 }
 
 .buildimg {
-  width: 60px;
+  max-width: 60px;
   height: auto;
-  margin-bottom: 50px;
+
+
 }
 
 .buildrow {
-  padding-top: 25%;
+  padding-top: 10%;
 }
 
 .buildbtn {
@@ -49,14 +50,14 @@ h1 {
 
 .zoom {
  
-  transition: transform .2s; /* Animation */
+  transition: transform .2s; 
   width: 300px;
   height: auto;
   margin: 0 auto;
 }
 
 .zoom:hover {
-  transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale(1.3); 
 }
 
 .templateRow {
@@ -119,9 +120,9 @@ opacity: 1;
 .resume-box {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
    height: 100%;
-   width: 40vw;
-   
-   padding: 2%    
+   width: 60vw;
+   padding: 2%;
+ 
 }
 
 .name {
@@ -131,6 +132,82 @@ opacity: 1;
  padding: 50px
 }
 .resume {
-  margin-left: 25% !important;
+  margin-left: 20% !important;
    margin-top: 5%;
+   margin-bottom: 5%
+}
+.ext {
+  margin: 15%;
+  margin-top: 5%;
+  margin-bottom: 1%
+}
+.row-header {
+  justify-content:center;
+}
+
+.big-btn {
+  justify-content:center;
+  margin-top: 15%;
+  font-weight: bold;
+}
+
+.builddiv {
+  
+  display: flex;
+
+  align-items:center;
+  justify-content:center;
+  height: 200px;
+  width: 200px;
+  line-height: 60px;
+
+  -moz-border-radius: 30px; /* or 50% */
+  border-radius: 100px; /* or 50% */
+
+  background-color: white;
+  color: #E0DFE2;
+  border-style: solid;
+  text-align: center;
+}
+
+.pos {
+  float: right !important
+}
+
+.list { 
+  margin: 0; 
+  min-width: 400px !important;
+  width: 200%;
+}
+
+.logo-icon {
+  height: 200% !important;
+ width: 120px 
+}
+
+.form-col {
+  padding-left: 0px !important
+}
+
+.padding-top {
+  padding-top: 20px;
+}
+
+.btn-delete-skill {
+  
+  margin-top: 25px !important;
+  margin-bottom: 10px !important;
+  margin-right: 5px !important
+}
+
+.textarea-col {
+  padding-left: 1px !important
+}
+
+.padding-bottom {
+  margin-bottom: 10px !important;
+}
+
+.resume-row {
+  width: 62vw;
 }

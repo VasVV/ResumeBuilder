@@ -30,35 +30,23 @@ export default function ChoseTemplate() {
 
 
     return (
-        <>
-        
-        
+        <div className='ext'>
         <h1>CHOOSE YOUR RESUME TEMPLATE</h1>
         <Container fluid>
         <Row className='templateRow'>
-            <Col>
-            <div className="container zoom">
-
-            <img src ={TemplateOne} className='zoom' />
-            <Link to="/stepone"> <Button className='chosetemplatebtn' onClick={() => dispatch({type: 'CHOSE_TEMPLATE', payload: 1 })}>Choose this template</Button> </Link>
-            </div> 
-             </Col>
-            <Col>
-            <div className="container zoom">
-            <img src ={TemplateTwo} className='zoom' />
-            <Button className='chosetemplatebtn' onClick={() => dispatch({type: 'CHOSE_TEMPLATE', payload: 2 })}>Choose this template</Button>
-            </div>
-            </Col>
-            <Col>
-            <div className="container zoom">
-            <img src ={TemplateThree} className='zoom' />
-            <Button className='chosetemplatebtn' onClick={() => dispatch({type: 'CHOSE_TEMPLATE', payload: 3 })}>Choose this template</Button>
-            </div>
-            </Col>
+                {[[1,TemplateOne],[2,TemplateTwo],[3,TemplateThree], [4, TemplateThree]].map((e,i) => {
+                    return (
+                        <Col>
+                            <div className="container zoom">
+                                <img src ={e[1]} className='zoom' />
+{                                 i <= 1 ? <Link to="/stepone"> <Button className='chosetemplatebtn' onClick={() => dispatch({type: 'CHOSE_TEMPLATE', payload: e[0] })}>Choose this template</Button> </Link>
+                                : <Button className='chosetemplatebtn'>Coming soon...</Button>
+}                            </div> 
+                        </Col>
+                    )
+                })}    
         </Row>
-
         </Container>
-
-        </>
+        </div>
     )
 }

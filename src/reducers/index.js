@@ -7,6 +7,7 @@ import tipsreducer from './tipsreducer';
 import addremoveskillreducer from './addremoveskillreducer';
 import addsummaryreducer from './addsummaryreducer';
 import currpagereducer from './currpagereducer';
+import changereducer from './changereducer';
 
 export default combineReducers({
     chosetemplatereducer,
@@ -16,5 +17,6 @@ export default combineReducers({
     tipsreducer,
     addremoveskillreducer,
     addsummaryreducer,
-    currpagereducer
+    currpagereducer,
+    changereducer
 })

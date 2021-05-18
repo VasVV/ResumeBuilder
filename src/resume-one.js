@@ -32,7 +32,7 @@ import './resume-one-styles.scoped.css';
 
  
   export default function ResumeOne() {
-    const pdata = useSelector(state => state.submitinforeducer[0]);
+    const pdata = useSelector(state => state.submitinforeducer);
     const summary = useSelector(state => state.addsummaryreducer);
     const jobs = useSelector(state => state.addremovejobreducer.jobs);
     const education = useSelector(state => state.addremoveeducationreducer.education);

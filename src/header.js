@@ -28,17 +28,21 @@ import { PDFViewer } from '@react-pdf/renderer';
 
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-
+import ListIcon from '@material-ui/icons/List';
 export default function Header() {
-    // const currpage = [[false, false], [true, true],[true, true],[true, true],[true, true],[false, false],[false, false]];
     const currpage = useSelector(state => state.currpagereducer);
-    //[[current, already]]
-    //[[false, true], [false, true], [true, true], [false, false] ]
-    //style={{fill: "green"}}/>
     return (
-        <Container fluid>
-            <Row className='float-right'>
-            <ListGroup horizontal>
+        <>
+        <Container className='fixed-top' fluid>
+        <h4>ResumeBuilder</h4>
+        </Container>
+        <Container className='fixed-top justify-content-end' fluid>
+            
+                
+             <Row >   
+                
+            <ListGroup  horizontal>
+
             <ListGroup.Item>{currpage[0][1] ? <CheckBoxIcon style={{fill: currpage[0][0] ? "green" : ''}} /> : <CheckBoxOutlineBlankIcon />} <span style={{ color: currpage[0][0] ? 'green' : '', fontWeight: currpage[0][0] ? 'bold' : '' }}>  CHOOSE TEMPLATE </span> </ListGroup.Item>
             <ListGroup.Item>{currpage[1][1] ? <CheckBoxIcon style={{fill: currpage[1][0] ? "green" : ''}}/> : <CheckBoxOutlineBlankIcon />}<span style={{ color: currpage[1][0] ? 'green' : '', fontWeight: currpage[1][0] ? 'bold' : '' }}>PERSONAL INFO</span> </ListGroup.Item>
             <ListGroup.Item>{currpage[2][1] ? <CheckBoxIcon style={{fill: currpage[2][0] ? "green" : ''}}/> : <CheckBoxOutlineBlankIcon />} <span style={{ color: currpage[2][0] ? 'green' : '', fontWeight: currpage[2][0] ? 'bold' : '' }}>EXPERIENCE</span></ListGroup.Item>
@@ -48,6 +52,9 @@ export default function Header() {
             <ListGroup.Item>{currpage[6][1] ? <CheckBoxIcon style={{fill: currpage[6][0] ? "green" : ''}}/> : <CheckBoxOutlineBlankIcon />} <span style={{ color: currpage[6][0] ? 'green' : '', fontWeight: currpage[6][0] ? 'bold' : '' }}>REVIEW & DOWNLOAD</span></ListGroup.Item>
             </ListGroup>
             </Row>
+           
         </Container>
+    
+    </>
     )
 }
