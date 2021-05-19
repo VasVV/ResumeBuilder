@@ -22,9 +22,10 @@ const addremoveeducationreducer = (state = {education:[]}, action, payload) => {
                 }
     
                 return e;
-            }),
-            
-          }  
+            }), 
+          }
+       case 'ALL_SCHOOLS':
+         return {...state, education: action.payload}   
       default:
         return state
     }

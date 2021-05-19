@@ -23,8 +23,9 @@ const addremovejobreducer = (state = {jobs:[]}, action, payload) => {
     
                 return e;
             }),
-            
-          } 
+          }
+        case 'ALL_JOBS':
+          return {...state, jobs: action.payload}
       default:
         return state
     }

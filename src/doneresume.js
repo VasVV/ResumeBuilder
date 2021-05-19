@@ -1,60 +1,33 @@
-import {Container, Col, Row, Button, Form, Dropdown, DropdownButton, Card} from 'react-bootstrap';
+import {Container, Col, Row, Button, Modal} from 'react-bootstrap';
 import {useEffect, useState, createRef} from 'react';
-import ReactDOMServer from 'react-dom/server';
-import {Link} from 'react-router-dom';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ResumeStart from './img/resumestart.jpg';
+import {Link, useHistory} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Pdf from "react-to-pdf";
-import BuildResume from './img/buildresume.svg';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-import DownloadResume from './img/downloadresume.svg';
 import axios from 'axios';
-import TemplateOne from './img/templateone.jpg';
-import TemplateTwo from './img/templatetwo.jpg';
-import TemplateThree from './img/templatethree.jpg';
 import { useSelector, useDispatch } from 'react-redux';
-import skillsimg from './img/skills.PNG';
-import summaryImg from './img/summary.PNG';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-
-
-import Summary from './summary';
-import Jobs from './jobs';
-import Education from './education';
-import Skills from './skills';
-import { PDFViewer } from '@react-pdf/renderer';
-
-
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import EmailIcon from '@material-ui/icons/Email';
-import PhoneIcon from '@material-ui/icons/Phone';
-import StarIcon from '@material-ui/icons/Star';
-import SchoolIcon from '@material-ui/icons/School';
-import WorkIcon from '@material-ui/icons/Work';
 
 import ResumeOne from './resume-one';
 import ResumeTwo from './resume-two';
 
-const DoneResume = () => {
+import {firebase} from './firebase';
 
+const DoneResume = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch({type: 'SET_CURRPAGE', payload: 6 });
         dispatch({type: 'SET_ALREADY', payload: 6})
     },[]);
 
-    const email = useSelector(state => state.submitinforeducer.email);
-    const name = useSelector(state => state.submitinforeducer.fname);
    
+    const name = useSelector(state => state.submitinforeducer.fname);
     const pdata = useSelector(state => state.submitinforeducer);
     const summary = useSelector(state => state.addsummaryreducer);
     const jobs = useSelector(state => state.addremovejobreducer.jobs);
     const education = useSelector(state => state.addremoveeducationreducer.education);
     const skills = useSelector(state => state.addremoveskillreducer);
     const template = useSelector(state => state.chosetemplatereducer);
-    console.log(pdata )
+    console.log('skills');
+    console.log(skills)
     let allJobs = jobs.map((e,i) => {
         return (`
                   <li>${e.employer}, ${e.jobtitle} </li>
@@ -342,6 +315,7 @@ ul {
   }
 
   const sendResume = () => {
+      let email = pdata.email;
       let params = {
           name,
           email
@@ -350,14 +324,129 @@ ul {
       axios.post('http://localhost:3001/sendmail', {
           params
       })
-  }
+  };
+
+  //login modal
+
+  let currUser = firebase.auth().currentUser;
+
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [err, setErr] = useState('');
+  const isInvalid = password == '' || email == '';
+  
+  const [signUp, setSignUp] = useState(false);
+
+  const handleLogin = async (e) => {
+      e.preventDefault();
+      
+      try {
+          await firebase.auth().signInWithEmailAndPassword(email, password);
+          const date = new Date(Date.now()).toString();
+
+        const resumeInfo = {
+            ...pdata,
+            summary,
+            jobs: [...jobs],
+            education: [...education],
+            skills: [...skills],
+            template,
+            date
+        }
+
+        await firebase.firestore().collection('resumes').add({
+            userId: currUser.uid,
+            ...resumeInfo
+        })
+          history.push('/profile')
+      } catch (error) {
+          setEmail('');
+          setPassword('');
+          setErr(error.message)
+      }
+
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    const createUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
+    await createUser.user.updateProfile({
+        displayName: pdata.fname
+    });
+
+    await firebase.firestore().collection('users').add({
+        userId: createUser.user.uid,
+        email
+    })
+    
+
+};
+
+    
 
     return (
         <>
+        <>
+            <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          
+        </Modal.Header>
+        {!signUp ? <Modal.Body>
+        <form onSubmit={handleLogin}>
+            <h2>Login</h2>
+                    {err && <p color='red'>Check your username and password and try again</p>}
+                    
+           
+                    E-mail: <input type='email' onChange = { ({target}) => setEmail(target.value)} />
+                    <br />
+                    Password: <input type='password' onChange = { ({target}) => setPassword(target.value)} />
+                    
+                    <button type='submit' disabled={isInvalid}>Login </button>
+                </form>
+                If you don't have an account <Button onClick={() => setSignUp(true)} >you can sign up here </Button>
+        </Modal.Body> :  <Modal.Body>
+        <form onSubmit={handleSignup}>
+                <h2>Register</h2>
+                    {err && <p color='red'>{err}</p>}
+
+                    
+                    E-mail: <input type='email' onChange = { ({target}) => setEmail(target.value)} />
+                    <br />
+                    Password: <input type='password' onChange = { ({target}) => setPassword(target.value)} />
+                    <button type='submit' disabled={isInvalid}>Sign up </button>
+                </form>
+                If you already have an account <Button onClick={() => setSignUp(false)} >you can log in here </Button>
+            </Modal.Body>}
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          
+        </Modal.Footer>
+      </Modal>
+    </>
+
         <Container fluid className='resume'>
         <Row className='resume-row'>
             <Col>
                 <Button className=' padding-bottom' onClick={() => convert(template)}>Download Resume</Button>
+                </Col>
+                <Col className=' d-flex justify-content-center'>
+                    {!currUser ? <Button className=' padding-bottom' onClick={() => handleShow()}>
+                        Save to my profile
+                    </Button> : 
+                      <Link to='/profile'>  <Button className=' padding-bottom' >
+                        Show my resumes
+                    </Button></Link>
+                    }
                 </Col>
                 <Col  className=' d-flex justify-content-end'>
                 <Button className=' padding-bottom' onClick={() => sendResume()}>Send Resume to e-mail</Button>

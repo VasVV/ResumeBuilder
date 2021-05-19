@@ -211,3 +211,19 @@ opacity: 1;
 .resume-row {
   width: 62vw;
 }
+
+.link-btn {
+  margin-left: 20px;
+}
+
+.resume-list-li {
+  margin: 20px;
+}
+
+.my-resumes {
+  text-align: center;
+}
+
+.profile-header {
+  margin-bottom: 40px;
+}

@@ -1,18 +1,11 @@
 import {Container, Col, Row, Button, Form, Alert} from 'react-bootstrap';
 import {useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ResumeStart from './img/resumestart.jpg';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import BuildResume from './img/buildresume.svg';
 
-import DownloadResume from './img/downloadresume.svg';
-
-import TemplateOne from './img/templateone.jpg';
-import TemplateTwo from './img/templatetwo.jpg';
-import TemplateThree from './img/templatethree.jpg';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PersonalInfo from './img/personalinfo.PNG';
 
 export default function StepOne () {

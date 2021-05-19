@@ -1,15 +1,10 @@
 
-import TemplateOne from './img/templateone.jpg';
-import TemplateTwo from './img/templatetwo.jpg';
-import TemplateThree from './img/templatethree.jpg';
 import { useSelector, useDispatch } from 'react-redux';
-import experienceimg from './img/experience.PNG';
 import { useEffect } from 'react';
 import {Container, Col, Row, Button, Form, Card} from 'react-bootstrap';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AddIcon from '@material-ui/icons/Add';
 import {Link} from 'react-router-dom';
 
 export default function StepThreeList () {

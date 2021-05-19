@@ -1,25 +1,18 @@
-import {Container, Col, Row, Button, Form, Dropdown, DropdownButton, Card} from 'react-bootstrap';
+import {Container, Col, Row, Button, Alert} from 'react-bootstrap';
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ResumeStart from './img/resumestart.jpg';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import BuildResume from './img/buildresume.svg';
+import { useDispatch } from 'react-redux';
 
-import DownloadResume from './img/downloadresume.svg';
-
-import TemplateOne from './img/templateone.jpg';
-import TemplateTwo from './img/templatetwo.jpg';
-import TemplateThree from './img/templatethree.jpg';
-import { useSelector, useDispatch } from 'react-redux';
-import skillsimg from './img/skills.PNG';
 import summaryImg from './img/summary.PNG';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+
 
 export default function StepFive () {
 
     const dispatch = useDispatch();
+    const [err, setErr] = useState(true);
 
     useEffect(() => {
         dispatch({type: 'SET_CURRPAGE', payload: 5 });
@@ -32,6 +25,13 @@ export default function StepFive () {
     }
 
     const [summary, setSummary] = useState('');
+
+    useEffect(() => {
+        if (summary) {
+            setErr(false)
+        }
+    })
+
     return (
         <div className='ext'>
         
@@ -41,14 +41,15 @@ export default function StepFive () {
             <Row>
                 
                 <Col xs={8} className='textarea-col'>
+                <Alert show={err} variant="danger">Please fill all fields to continue</Alert>
                
                     <textarea className='summary-text' onChange ={(e) => setSummary(e.target.value)} /></Col>
                 <Col><img src={summaryImg} /></Col>
             </Row>
-            <Row>
-                                <Col xs={6}><Link to='/alltips'><Button onClick= {()=>back()} >Back</Button> </Link></Col>
+            <Row className='d-flex'>
+                                <Col xs={6} className='padding-top justify-self-start'><Link to='/alltips'><Button onClick= {()=>back()} >Back</Button> </Link></Col>
                                 
-                                <Col><Link to='/doneresume'><Button onClick={()=> dispatch({type: 'ADD_SUMMARY', payload: summary})}>Save and continue</Button></Link></Col>
+                                <Col className='padding-top'><Link to='/doneresume'><Button  onClick={()=> dispatch({type: 'ADD_SUMMARY', payload: summary})}>Save and continue</Button></Link></Col>
                             </Row>
         </Container>
         </div>

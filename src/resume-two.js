@@ -1,32 +1,11 @@
 import React from 'react';
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import {Container, Col, Row, Button, Form, Dropdown, DropdownButton, Card} from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
 
 
-import {useEffect, useState, createRef} from 'react';
-import {Link} from 'react-router-dom';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ResumeStart from './img/resumestart.jpg';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Pdf from "react-to-pdf";
-import BuildResume from './img/buildresume.svg';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-import DownloadResume from './img/downloadresume.svg';
 
-import TemplateOne from './img/templateone.jpg';
-import TemplateTwo from './img/templatetwo.jpg';
-import TemplateThree from './img/templatethree.jpg';
-import { useSelector, useDispatch } from 'react-redux';
-import skillsimg from './img/skills.PNG';
-import summaryImg from './img/summary.PNG';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-
-import Summary from './summary';
-import Jobs from './jobs';
-import Education from './education';
-import Skills from './skills';
-import { PDFViewer } from '@react-pdf/renderer';
+import { useSelector} from 'react-redux';
 
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import EmailIcon from '@material-ui/icons/Email';

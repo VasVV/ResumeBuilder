@@ -1,7 +1,5 @@
 import {Container, Col, Row, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ResumeStart from './img/resumestart.jpg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import BuildResume from './img/buildresume.svg';

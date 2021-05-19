@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Start from './start';
 import Build from './build'
@@ -12,7 +11,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Redirect,
 } from "react-router-dom";
 import AllTips from './allTips';
 import StepTwoList from './steptwolist';
@@ -25,6 +24,7 @@ import StepFive from './stepfive';
 import DoneResume from './doneresume';
 import Header from './header';
 import Navbar from 'react-bootstrap/Navbar';
+import Profile from './profile';
 
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -39,7 +39,12 @@ function App() {
 
 
     <Switch>
-          
+    <Route exact path="/">
+    <Redirect to="/start" />
+        </Route>
+        <Route path="/profile">
+            <Profile />
+          </Route>
           <Route path="/start">
             <Start />
           </Route>

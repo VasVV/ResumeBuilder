@@ -1,34 +1,8 @@
-import {Container, Col, Row, Button, Form, Dropdown, DropdownButton, Card, ListGroup} from 'react-bootstrap';
-import {useEffect, useState, createRef} from 'react';
-import ReactDOMServer from 'react-dom/server';
-import {Link} from 'react-router-dom';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ResumeStart from './img/resumestart.jpg';
+import {Container, Row, ListGroup} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Pdf from "react-to-pdf";
-import BuildResume from './img/buildresume.svg';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-import DownloadResume from './img/downloadresume.svg';
-
-import TemplateOne from './img/templateone.jpg';
-import TemplateTwo from './img/templatetwo.jpg';
-import TemplateThree from './img/templatethree.jpg';
 import { useSelector, useDispatch } from 'react-redux';
-import skillsimg from './img/skills.PNG';
-import summaryImg from './img/summary.PNG';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-
-
-import Summary from './summary';
-import Jobs from './jobs';
-import Education from './education';
-import Skills from './skills';
-import { PDFViewer } from '@react-pdf/renderer';
-
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import ListIcon from '@material-ui/icons/List';
 export default function Header() {
     const currpage = useSelector(state => state.currpagereducer);
     return (

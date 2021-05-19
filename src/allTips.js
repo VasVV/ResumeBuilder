@@ -1,7 +1,7 @@
 import {Container, Col, Row, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ResumeStart from './img/resumestart.jpg';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import experienceimg from './img/experience.PNG'; //2
@@ -9,7 +9,7 @@ import educationimg from './img/education.PNG'; //3
 import skillsimg from './img/skills.PNG'; //4
 import summaryImg from './img/summary.PNG'; //5
 
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
 
 const allImgs = [experienceimg, educationimg, skillsimg, summaryImg]
@@ -52,8 +52,7 @@ export default function AllTips() {
         if (!num){
         setNum(value)}
     });
-    console.log('num')
-    console.log(value)
+
     return (
   <div className='ext'>
         
